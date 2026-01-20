@@ -115,3 +115,7 @@ Digit Prediction
 0 : 0.976247
 
 It also shows the processed 28×28 MNIST-style input image used for prediction.
+
+Below is the processed 28×28 MNIST-style image used for prediction:
+
+![MNIST Style Output](./assets/demo.png)
