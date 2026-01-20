@@ -1,25 +1,30 @@
 ✍️ Handwritten Digit Recognition (MNIST-Style)
 
-This project is a handwritten digit recognition web application inspired by the classic MNIST demonstration.
+This project is a handwritten digit recognition web application inspired by the classic MNIST neural network demonstration.
 
-Users can draw a digit (0–9) in the browser, and the application predicts the digit using a simple neural network, following the exact same preprocessing logic used in MNIST training.
+Users can draw a digit (0–9) in the browser, and the application predicts the digit along with confidence scores using a simple, explainable neural network.
 
-The goal of this project is correctness, explainability, and consistency, not unnecessary model complexity.
+⸻
+
+🖼️ Demo
+
+Below is a live example of the application predicting a handwritten digit correctly, along with probability scores and the processed MNIST-style input.
+
 
 ⸻
 
 🔍 What This Project Does
-	•	Allows users to draw digits using a mouse
-	•	Converts the drawing into a 28×28 MNIST-style image
-	•	Uses a feedforward neural network to predict the digit
-	•	Displays prediction probabilities
-	•	Mimics the behavior of the original MNIST neural network demo
+	•	Lets users draw digits using a mouse
+	•	Converts drawings into MNIST-style 28×28 images
+	•	Uses a feedforward neural network (MLP) to predict digits
+	•	Displays top predictions with probabilities
+	•	Matches the behavior of the original MNIST C++ demo
 
 ⸻
 
 🧠 Model Architecture
 
-This project intentionally uses a simple feedforward neural network, not a CNN.
+This project intentionally avoids complex CNNs and uses a classic feedforward neural network, exactly like the original MNIST example.
 
 Network Structure
 
@@ -28,37 +33,36 @@ Hidden Layer  : 30 neurons (Sigmoid activation)
 Output Layer  : 10 neurons (Digits 0–9)
 
 Why this model?
-	•	This architecture is identical to the original MNIST example
-	•	Easy to understand and explain
-	•	Very reliable when preprocessing is correct
-	•	Avoids overfitting and data mismatch issues
+	•	Simple, interpretable, and reliable
+	•	No training–prediction mismatch
+	•	Excellent results with correct preprocessing
 
 ⸻
 
-🖼️ Image Preprocessing (Core Logic)
+🖼️ Image Preprocessing (Key to Accuracy)
 
-The accuracy of this project comes from correct preprocessing, not model complexity.
-
-Each drawn digit goes through the following steps:
-	1.	Convert drawing to grayscale
+Every drawn digit goes through the same preprocessing used during training:
+	1.	Convert to grayscale
 	2.	Invert colors (white digit on black background)
-	3.	Extract the bounding box around the digit
-	4.	Resize the digit to 20×20 pixels
-	5.	Place it in the center of a 28×28 canvas
-	6.	Center the digit using center of mass of pixels
-	7.	Normalize pixel values to range 0–1
+	3.	Extract bounding box of the digit
+	4.	Resize digit to 20×20 pixels
+	5.	Place it at the center of a 28×28 canvas
+	6.	Align using center of mass of pixels
+	7.	Normalize pixel values to 0–1
 
-This process ensures that training data and prediction input are identical.
+This ensures training and inference data are identical, which is why predictions are accurate.
 
 ⸻
 
 📁 Project Structure
 
 handwritten_digit_recognition/
-├── train.py            # Trains the neural network on MNIST
+├── train.py            # Model training script
 ├── app.py              # Streamlit web application
 ├── requirements.txt    # Python dependencies
-├── digit_model.keras   # Saved trained model
+├── digit_model.keras   # Trained model (generated)
+├── assets/
+│   └── demo.png        # Demo screenshot
 └── README.md
 
 
@@ -80,14 +84,11 @@ pip install -r requirements.txt
 
 🏋️ Train the Model
 
-Run the training script once:
+Run once to train the model on the MNIST dataset:
 
 python train.py
 
-This will:
-	•	Download the MNIST dataset
-	•	Train the neural network
-	•	Save the model as:
+This will generate:
 
 digit_model.keras
 
@@ -96,21 +97,21 @@ digit_model.keras
 
 ▶️ Run the Application
 
-Start the web application:
+Start the web app:
 
 streamlit run app.py
 
-Then open the displayed URL in your browser.
+Open the displayed URL in your browser.
 
 ⸻
 
 📊 Example Output
 
-After drawing a digit, the application shows predictions like:
+When a digit is drawn, the app displays results like:
 
-Digit Prediction:
-2 : 0.999998
-3 : 0.000002
-6 : 0.000000
+Digit Prediction
+9 : 0.994924
+4 : 0.981900
+0 : 0.976247
 
-It also displays the processed 28×28 MNIST-style image used for prediction.
+It also shows the processed 28×28 MNIST-style input image used for prediction.
