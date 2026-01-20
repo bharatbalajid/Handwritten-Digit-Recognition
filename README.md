@@ -18,7 +18,6 @@ Below is a live example of the application predicting a handwritten digit correc
 	•	Converts drawings into MNIST-style 28×28 images
 	•	Uses a feedforward neural network (MLP) to predict digits
 	•	Displays top predictions with probabilities
-	•	Matches the behavior of the original MNIST C++ demo
 
 ⸻
 
